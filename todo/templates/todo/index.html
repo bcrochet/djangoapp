@@ -1,0 +1,43 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}
+Todo List
+{% endblock title %}
+
+{% block content %}
+    <!-- <h1>Todo List</h1> -->
+<div class="card">
+    <div class="card-header">
+        <h1 class="text-center">ToDo App</h1>
+    </div>
+    <div class="card-body">    
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+                {{ todo_form.todo_text }}
+
+                <button type="submit" class="btn btn-primary btn-lg">ADD</button>
+            </div>
+        </form>
+
+        <h4 class="bg-warning text-light py-2 rounded text-center">My ToDos</h4>
+
+        <ul class="list-group">
+            {% for todo in todo_list %}
+            <li class="list-group-item list-group-item-action">
+                {% if todo.todo_done %}
+                <strike>{{ todo.todo_text }}</strike>
+                {% else %}
+                {{ todo.todo_text }}
+                {% endif %}
+                <div class="float-right">
+                    <a href="{% url 'update_todo' todo.id %}" class="btn btn-sm btn-info">Update</a>
+                    <a href="{% url 'delete_todo' todo.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

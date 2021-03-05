@@ -1,0 +1,26 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}
+Update Todo
+{% endblock title %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1 class="text-center">ToDo App</h1>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+                <div class="input-group-text" data-toggle="tooltip" data-placement="bottom" title="Marked as completed">
+                    {{ todo_edit_form.todo_done }}
+                </div>
+                {{ todo_edit_form.todo_text }}
+                <button type="submit" class="btn btn-lg btn-info">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
